@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-175912136-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-175912136-1');
+  </script>
+
+    <title>ModelTeller</title>
+    <!--<meta charset="utf-8">-->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+
+    <link rel="shortcut icon" type="image/x-icon" href="https://modelteller.tau.ac.il/pics/logo.gif" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css">
+
+    <!--files for the select tag-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/i18n/defaults-*.min.js"></script>-->
+
+    <!--files for the checkbox tag (toggle)-->
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/nav.css">
+    <script src="scripts/form_handler.js"></script>
+
+</head>
+<body>
+    <nav role="navigation" class="navbar navbar-inverse" id="nav">
+        <div class="jumbotron" id="jumbo">
+            <div class="container">
+                <div class="row" id="title-row" align="center">
+                    <div class="col-md-1">
+                    </div>
+                    <div class="col-md-10" align="center">
+                        <span id="server-title">ModelTeller</span><br>
+                        <img src="pics/logo.gif" id="nav_bar_image" class="img-rounded"><br>
+                        <span id="sub-title">A machine learning tool for phylogenetic model selection</span>
+                        <br>
+                        <span id="research-site">
+                        Research Site | <a href="https://m.tau.ac.il/~itaymay/index.html" target="_blank" style="color: inherit">Mayrose Group</a>
+                        </span>
+                        <br>
+                        <br>
+                    </div>
+                    <div class="col-md-1">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container" id="nav_container">
+            <div class="row">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-8">
+                    <ul class="nav navbar-nav" id="menu-nav">
+                        <li class="active">
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li>
+                            <a href="overview.html">Overview</a>
+                        </li>
+                        <li>
+                            <a href="download.html">Download</a>
+                        </li>
+                        <li>
+                            <a href="https://english.tau.ac.il/" id="tau-link" target="_blank">
+                                <img src=pics/TAU_LOGO.png id="tau-logo">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div id="behind-nav-bar">
+    </div>
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-8" id="basic">
+                <div id="short_description">
+                Current practices for model selection (e.g., AIC, BIC) are aimed at finding the underlying model, but don't always produce the most accurate phylogeny.
+                    <b>ModelTeller is a machine-learning based application that predicts the best substitution model for phylogenetic reconstruction,
+                    with an emphasis on branch-lengths accuracy!</b><br>
+                <u>Output:</u><br>
+                <ul>
+                    1. The <b>best predicted model</b> and the ranking of alternative models, in case that you cannot use the best model in downstream analysis.
+                    <button type="button" class="btn btn-lg glyphicon" data-toggle="modal" data-target="#models_info_modal" id="lib_info">&#xe085;</button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="models_info_modal" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h3 class="modal-title">Valid models</h3>
+                                </div>
+                                <div class="modal-body">
+                                    ModelTeller will return the best model, and the ranking of alternative models among the following 24 nucleotide substitution models: <br>
+                                        <ul>
+                                            <li> Jukes and Cantor 1969 (<b>JC</b>)</li>
+                                            <li> Felsenstein 1981 (<b>F81</b>)</li>
+                                            <li> Kimura two parameters 1980 (<b>K2P</b>)</li>
+                                            <li> Hasegawa-Kishino-Yano 1985 (<b>HKY</b>)</li>
+                                            <li> The generalized symmetrical model, Zharkikh, 1994 (<b>SYM</b>)</li>
+                                            <li> General Time Reversible, Tavare 1986 (<b>GTR</b>)</li><br>
+                                        </ul>
+                                    combined with the proportion of invariable sites (<b>+I</b>), rate heterogeneity across sites (<b>+G</b>), or both (<b>+I+G</b>).
+                                    <br><br>
+                                </div>
+                            </div>
+                        </div>
+                    </div><br>
+                    2. The <b>maximum-likelihood tree</b>, reconstructed using the best model.<br>
+                    3. The <b>feature contribution analysis</b> to learn the weight of every feature in the prediction.<br>
+                </ul>
+            </div>
+                <form id="MODELTELLER_form" action="https://modelteller.tau.ac.il/cgi-bin/modelteller_cgi.py" method="post" ENCTYPE="multipart/form-data" target="_blank" onsubmit="return validateFields();">
+                    <!--<center><img src=pics/under_construction.png id="under-construction"></center><br><br>-->
+
+                    <div class="form-group row">
+                        <div class="col-md-8">
+                            <label for="alignment_file">
+                                Load a nucleotide multiple sequence alignment:
+                            <input type="checkbox" id="checkbox" name="checkbox" data-toggle="toggle" data-on="as a file" data-off="as text" onchange="fileOrStr()" data-width="150" checked>
+                            <button type="button" class="btn btn-lg glyphicon" data-toggle="modal" data-target="#msa_info_modal" id="lib_info">&#xe085;</button>
+                            </label>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="msa_info_modal" role="dialog">
+                                <div class="modal-dialog">
+
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h3 class="modal-title">Valid alignment format</h3>
+                                        </div>
+                                        <div class="modal-body">
+                                            <ul>
+                                                <li><b>Clustal</b> - output from Clustal W or X.</li><br>
+                                                <li><b>Emboss</b> - EMBOSS tools' "pairs" and "simple" alignment formats.</li><br>
+                                                <li><b>Fasta</b> - the generic sequence file format where each record starts with an identifier line starting with a ">" character, followed by lines of sequence.</li><br>
+                                                <li><b>Ig</b> - the IntelliGenetics file format, apparently the same as the MASE alignment format.</li><br>
+                                                <li><b>Mauve</b> - output from progressiveMauve/Mauve.</li><br>
+                                                <li><b>Nexus</b> - output from NEXUS.</li><br>
+                                                <li><b>Phylip / phylip-sequential / phylip-relaxed.</b></li><br>
+                                                <li><b>Stockholm</b> - a richly annotated alignment file format used by PFAM.</li><br>
+                                            </ul>
+											<b>Several alignments may be uploaded in one file</b>, one after the other, in all formats <u>except for fasta</u>.<br>
+											<b>Ambiguous characters and gaps (-, ., ?, n)</b> will be treated as gaps.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-5">
+                            <label for="alignment_file">
+                                Alignment file:
+                            </label>
+                            <label class="btn btn-default btn-file btn-block">
+                                <input type="file" id="alignment_file" name="alignment_file">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-9">
+                            <label for="alignment_str">Alignment as text:</label>
+                            <textarea class="form-control" id="alignment_str" name="alignment_str" rows="10" cols="30" disabled></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-9">
+                            <label>Running mode:</label>
+                            <button type="button" class="btn btn-lg glyphicon" data-toggle="modal" data-target="#running_mode_info_modal" id="running_mode_info">&#xe085;</button><br>
+                            <input type="radio" id="running_mode_0" name="running_mode" value="0" onchange="getUserDefinedTopology()"> Select the best model for branch-lengths estimation<br>
+                            <input type="radio" id="running_mode_1" name="running_mode" value="1" onchange="getUserDefinedTopology()"> Use a fixed GTR+I+G topology -- <i>Recommended!</i><br>
+                            <input type="radio" id="running_mode_2" name="running_mode" value="2" onchange="getUserDefinedTopology()"> Use a user defined topology<br>
+                        </div>
+                    </div>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="running_mode_info_modal" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h3 class="modal-title">Running modes</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <ul>
+                                        <li><b>Select the best model for branch-lengths estimation</b> - this option will rapidly select a single model for maximum-likelihood phylogeny reconstruction. The maximum-likelihood phylogeny, i.e., the model parameters, the branch-lengths, and the topology will be optimized for you after the model is predicted.</li><br>
+                                        <li><b>Use a fixed GTR+I+G topology</b> - this option will first optimized the GTR+I+G phylogeny and then predict the optimal model for branch-length estimation. The maximum-likelihood phylogeny will be optimized given the GTR+I+G fixed topology. Prediction of the best model might take a little while due to the preliminary GTR+I+G phylogeny reconstruction, but the final tree will be computed rapidly.<b> This procedure was demonstrated to perform best both for topologies and branch-length estimation accuracies on complex simulation models.</b></li><br>
+                                        <li><b>Use a user defined topology</b> - if you have a good, validated topology for your data, please provide it and ModelTeller will predict the best model for branch-length estimation. The maximum-likelihood phylogeny will be computed for you given your fixed topology.</li><br>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row" id="user_defined_topology_block" hidden="hidden">
+                        <div class="col-md-9">
+                            <label for="user_defined_topology">
+                                Upload a tree to be used as a fixed topology (Newick format):
+                            </label>
+                            <label class="btn btn-default btn-file btn-block">
+                                <input type="file" id="user_defined_topology" name="user_defined_topology" disabled>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <div>
+                            <label for="features_contributions">
+                                <input type="checkbox" id="features_contributions" name="features_contributions">
+                                Compute feature contribution (checking this option will incur long running time)
+                                <br>
+
+                            </label>
+                                </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-5">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="We'll send you a link to the results">
+                            <input class="form-control" name="confirm_email" type="hidden">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="job_title">A descriptive job title</label>
+                            <input type="text" class="form-control" id="job_title" name="job_title" placeholder="(optional)">
+                        </div>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-success btn-lg btn-block"><span class="glyphicon glyphicon-cloud-upload"></span>&nbsp;<b>Predict the best model!</b></button><br><br>
+                    <button type="button" class="btn btn-info" onclick="loadExample()">Load an example MSA</button>
+                    <button type="reset" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span>&nbsp;Reset form</button>
+                    <br><br><br>
+
+                </form>
+            </div>
+            <div class="col-md-2">
+            </div>
+        </div>
+    </div>
+
+    <nav role="navigation" class="navbar-inverse navbar-fixed-bottom ng-binding">
+        Research Site | <a href="https://m.tau.ac.il/~itaymay/index.html" target="_blank">Mayrose Group</a>
+    </nav>
+</body>
+</html>
